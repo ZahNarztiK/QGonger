@@ -7,12 +7,11 @@ function q_chk(){
 	chrome.storage.sync.get("owrai",kw=>{
 		$('span:contains('+kw.owrai+')').each(function(){
 			if($(this).attr("data-text")=="true"){
-				var e=$.Event("keydown");
-				e.keyCode=13;
-				e.which=13;
-				var par=findPar($(this));
-				alert(par.attr("class"));
-				par.trigger(e);
+				//var e=$.Event("keydown", { which:13, keyCode:13 } );
+				//var par=findPar($(this));
+				//alert(par.attr("class"));
+
+				$(this).trigger("submit");
 			}
 		});
 		//chrome.runtime.sendMessage({daimai:(document.documentElement.innerHTML.indexOf(kw.owrai)==-1)}))}
