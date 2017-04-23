@@ -1,0 +1,39 @@
+{
+	"manifest_version": 2,
+
+	"name": "Q Gonger",
+	"description": "Created by NC Production",
+	"version": "0",
+	"icons": {
+		"16":"icon/icon16.png",
+		"32":"icon/icon32.png",
+		"64":"icon/icon64.png",
+		"128":"icon/icon128.png",
+		"256":"icon/icon256.png",
+		"512":"icon/icon512.png"
+	},
+
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+
+	"browser_action": {
+		"default_icon": "icon/icon16.png",
+		"default_popup": "popup.html"
+	},
+
+	"content_scripts": [{
+		"run_at": "document_end",
+		"matches": ["https://www.facebook.com/*"],
+		"js": ["jquery-1.7.2.js","qgg.js"]
+	}],
+
+	"permissions": [
+		"activeTab", "notifications", "storage" , "tabs", "webNavigation", "https://www.facebook.com/*"
+	],
+
+	"web_accessible_resources": [
+		"icon/noti.png"
+	]
+}
