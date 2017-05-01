@@ -1,0 +1,41 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<title>Test Board</title>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<script>
+$(function(){
+	$.ajaxSetup({ cache: true });
+	$.getScript('http://connect.facebook.net/en_US/sdk.js', function(){
+		FB.init({
+		appId: '1160546454015150',
+		version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+	});
+	$('#loginbutton,#feedbutton').removeAttr('disabled');
+		//FB.getLoginStatus(updateStatusCallback);
+	});
+	$(document).click(function(){
+		FB.api(
+			"/1088933644539020/comments",
+			"POST",
+			{
+				"message": "ง่อว"
+			},
+			function (response) {
+				console.log("added");
+				if (response && !response.error) {
+					console.log(response.id);
+				}
+				else console.log(response.error);
+			}
+		);
+	});
+});
+</script>
+</body>
+</html>
