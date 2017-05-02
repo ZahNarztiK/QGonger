@@ -1,5 +1,11 @@
 function findPar(obj){
-	return obj.attr("contenteditable")=="true"?obj:findPar(obj.parent());
+	var ev=$.Event("keydown", { which:13, keyCode:13 } ),
+		ev2=$.Event("keyup", { which:13, keyCode:13 } );
+	obj.trigger(ev);
+	obj.trigger(ev2);
+	if(obj==$(document)) return;
+	findPar(obj.parent());
+	//return obj.attr("contenteditable")=="true"?obj:findPar(obj.parent());
 }
 
 function q_chk(){
@@ -7,11 +13,12 @@ function q_chk(){
 	chrome.storage.sync.get("owrai",kw=>{
 		$('span:contains('+kw.owrai+')').each(function(){
 			if($(this).attr("data-text")=="true"){
-				//var e=$.Event("keydown", { which:13, keyCode:13 } );
+				console.log("event");
+				//var ev=$.Event("keydown", { which:13, keyCode:13 } );
 				//var par=findPar($(this));
 				//alert(par.attr("class"));
-
-				$(this).trigger("submit");
+				findPar($(this));
+				//$(this).trigger(ev);//("submit");
 			}
 		});
 		//chrome.runtime.sendMessage({daimai:(document.documentElement.innerHTML.indexOf(kw.owrai)==-1)}))}
